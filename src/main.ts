@@ -1,17 +1,18 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory }  from '@nestjs/core';
+import { AppModule }    from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import { AppModule } from './app.module';
 
-async function bootstrap() {
-	const app = await NestFactory.create(AppModule);
-	app.useGlobalPipes(
-		new ValidationPipe({
-			// *Ignora los campos que no esten definidos en el DTO
-			whitelist: true,
-			// *Devuelve un error si hay campos que no esten definidos en el DTO
-			forbidNonWhitelisted: true,
-		}),
-	);
-	await app.listen(3000);
+
+( async () => {
+    const app = await NestFactory.create( AppModule );
+    app.useGlobalPipes( new ValidationPipe({ 
+        // *Whitelist solo deja pasar las propiedades que estén definidas en el DTO
+        whitelist               : true,
+        // *Indica con un mensaje más descriptivo que propiedad no están permitidas
+        forbidNonWhitelisted    : true,
+        // transform               : true
+    }) );
+
+    await app.listen( 3000 )
 }
-bootstrap();
+)();
