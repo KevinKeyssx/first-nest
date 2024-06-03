@@ -18,5 +18,5 @@ import { ValidationPipe } 	from '@nestjs/common';
 
 	app.setGlobalPrefix( 'api/v2' );
 
-	await app.listen( 3000 );
+	await app.listen( process.env.PORT );
 })();
