@@ -10,6 +10,10 @@ import { ValidationPipe } 	from '@nestjs/common';
 		whitelist               : true,
 		// *Indica con un mensaje más descriptivo que propiedad no están permitidas
 		forbidNonWhitelisted    : true,
+		transform 				: true,
+		transformOptions        : {
+			enableImplicitConversion: true
+		}
 	}) );
 
 	app.setGlobalPrefix( 'api/v2' );
