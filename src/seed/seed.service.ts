@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { InjectModel } 	from '@nestjs/mongoose';
+import { Injectable } 	from '@nestjs/common';
+import { Model } 		from 'mongoose';
 
-import { PokeResponse } 	from './interfaces/poke-response.interface';
 // import { PokemonService } 	from 'src/pokemon/pokemon.service';
+import { PokeResponse } 	from './interfaces/poke-response.interface';
 import { CreatePokemonDto } from 'src/pokemon/dto/create-pokemon.dto';
 import { AxiosAdapter } 	from 'src/common/adapters/axios.adapter';
-import { InjectModel } from '@nestjs/mongoose';
-import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
-import { Model } from 'mongoose';
+import { Pokemon } 			from 'src/pokemon/entities/pokemon.entity';
 
 @Injectable()
 export class SeedService {
@@ -23,7 +23,7 @@ export class SeedService {
 
 		await this.pokemonModel.deleteMany();
 
-		const data: PokeResponse = await this.http.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon');
+		const data: PokeResponse = await this.http.get<PokeResponse>( process.env.POKE_API );
 
 		const pokemon: CreatePokemonDto[] = data.results.map( poke => ({
 			name	: poke.name,

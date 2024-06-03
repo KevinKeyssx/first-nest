@@ -18,7 +18,13 @@ npm i -g @nestjs/cli
 ```
 docker-compose up -d
 ```
-6. Realizar una peticion GET al SEED para poblar la base de datos
+6. Clonar el archivo ```.env.example``` y renombrarlo a ```.env``` y configurar las variables de entorno
+7. Ejecutar la aplicación con el comando
+```
+npm run start:dev
+
+```
+8. Realizar una peticion GET al SEED para poblar la base de datos
 ```
 http://localhost:3000/seed
 ```
@@ -26,3 +32,4 @@ http://localhost:3000/seed
 ## Stack usados
 * MongoDB
 * NestJS
+* Joi
