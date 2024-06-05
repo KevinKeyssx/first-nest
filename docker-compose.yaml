@@ -7,6 +7,6 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_DATABASE: nest-pokemon
+      MONGO_DATABASE: pokedex
     volumes:
       - ./mongo:/data/db
