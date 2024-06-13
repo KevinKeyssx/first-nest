@@ -9,7 +9,11 @@
 docker-compose up -d
 ```
 2. Configurar las variables de entorno en el archivo .env.template y renombrar a .env
-3. Levantar el proyecto
+3. Ejecutar SEED
+```
+http://localhost:3000/api/seed
+```
+4. Levantar el proyecto
 ```
 npm start:dev
 yarn start:dev
