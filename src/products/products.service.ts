@@ -1,20 +1,21 @@
 import {
 	Injectable,
 	NotFoundException
-}								from '@nestjs/common';
-import { InjectRepository } 	from '@nestjs/typeorm';
-import { DataSource, Repository } 			from 'typeorm';
+}							from '@nestjs/common';
+import { InjectRepository }	from '@nestjs/typeorm';
 
-import { validate as isUUID } from 'uuid';
+import { DataSource, Repository } 	from 'typeorm';
+import { validate as isUUID } 		from 'uuid';
 
-import { CreateProductDto }		from './dto/create-product.dto';
-import { UpdateProductDto }		from './dto/update-product.dto';
-import { handleError } 			from 'src/errors/handle-error';
-import { PaginationDto } 		from 'src/common/dtos/pagination';
+import { CreateProductDto }	from './dto/create-product.dto';
+import { UpdateProductDto }	from './dto/update-product.dto';
+import { handleError } 		from '../errors/handle-error';
+import { PaginationDto } 	from '../common/dtos/pagination';
+import { User } 			from 'src/auth';
 import {
 	Product,
 	ProductImage
-} 				from './entities';
+} 							from './entities';
 
 
 @Injectable()
@@ -31,13 +32,14 @@ export class ProductsService {
 	) {}
 
 
-	async create( createProductDto: CreateProductDto ) {
+	async create( createProductDto: CreateProductDto, user: User ) {
 		try {
 			const { images = [], ...productDetails } = createProductDto;
 
 			const product = this.productRepository.create({
 				...productDetails,
-				images: images.map( image => this.productImageRepository.create({ url: image }))
+				images: images.map( image => this.productImageRepository.create({ url: image })),
+				user
 			});
 
 			await this.productRepository.save( product );
@@ -48,13 +50,14 @@ export class ProductsService {
 		}
 	}
 
-	async createAllProducts( products: CreateProductDto[] ) {
+	async createAllProducts( products: CreateProductDto[], user: User ) {
 		try {
 			const productsEntities = products.map( product => {
 				const { images = [], ...productDetails } = product;
 				return this.productRepository.create({
 					...productDetails,
-					images: images.map( image => this.productImageRepository.create({ url: image }))
+					images: images.map( image => this.productImageRepository.create({ url: image })),
+					user
 				});
 			});
 
@@ -107,7 +110,7 @@ export class ProductsService {
 	});
 
 
-	async update( term: string, updateProductDto: UpdateProductDto ) {
+	async update( term: string, updateProductDto: UpdateProductDto, user: User ) {
 
 		const { images, ...toUpdate } = updateProductDto;
 
@@ -136,7 +139,7 @@ export class ProductsService {
 				product.images = await this.productImageRepository.findBy({ product });
 			}
 		
-
+			product.user = user;
 			await queryRunner.manager.save( product );
 			console.log('***HACE EL SAVE');
 			

@@ -7,7 +7,7 @@ import {
 	ConfigService
 } from '@nestjs/config';
 
-import { v4 as uuid } 		from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import { AuthService } 		from './auth.service';
 import { AuthController } 	from './auth.controller';

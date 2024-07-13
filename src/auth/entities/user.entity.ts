@@ -1,10 +1,19 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+    BeforeInsert,
+    BeforeUpdate,
+    Column,
+    Entity,
+    OneToMany,
+    PrimaryGeneratedColumn
+} from "typeorm";
+
+import { Product } from '../../products/entities';
 
 
 @Entity({ name: 'users' })
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn( 'uuid' )
     id: string;
 
     @Column( 'varchar', {
@@ -22,7 +31,7 @@ export class User {
 
     @Column( 'bool', {
         default: true
-    } )
+    })
     isActive: boolean;
 
     @Column( 'text', {
@@ -30,6 +39,12 @@ export class User {
         default : [ 'user' ]
     })
     roles: string[];
+
+    @OneToMany(
+        () => Product,
+        ( product ) => product.user
+    )
+    product: Product;
 
     @BeforeInsert()
     @BeforeUpdate()

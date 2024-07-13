@@ -32,8 +32,8 @@ export class JwtStrategy extends PassportStrategy( Strategy ) {
         const { email } = payload;
         const user      = await this.userRepository.findOneBy({ email });
 
-        if ( !user ) throw new UnauthorizedException( 'Invalid credentials' );
-        if ( !user.isActive ) throw new UnauthorizedException( 'User is inactive' );
+        if ( !user )            throw new UnauthorizedException( 'Invalid credentials' );
+        if ( !user.isActive )   throw new UnauthorizedException( 'User is inactive' );
 
         return user;
     }
