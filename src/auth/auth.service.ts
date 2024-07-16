@@ -41,7 +41,7 @@ export class AuthService {
 				...user,
 				token: this.#getJwtToken({ email: user.email, id: user.id })
 			};
-		} catch (error) {
+		} catch ( error ) {
 			handleError( error, AuthService.name );
 		}
 
@@ -67,10 +67,16 @@ export class AuthService {
 		return {
 			...user,
 			token: this.#getJwtToken({ email: user.email, id: user.id })
-		};
+		}
 	}
 
 
-	#getJwtToken = ( payload: JwtPayload ) => this.jwtService.sign( payload )
+	checkAuthStatus = ( user: User ) => ({
+		...user,
+		token: this.#getJwtToken({ email: user.email, id: user.id })
+	});
+
+
+	#getJwtToken = ( payload: JwtPayload ) => this.jwtService.sign( payload );
 
 }

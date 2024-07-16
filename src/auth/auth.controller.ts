@@ -1,16 +1,32 @@
-import { Controller, Get, Post, Body, HttpCode, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import {
+	Controller,
+	Get,
+	Post,
+	Body,
+	HttpCode,
+	UseGuards
+} 						from '@nestjs/common';
+import { AuthGuard }	from '@nestjs/passport';
+import { ApiTags } 		from '@nestjs/swagger';
 
+import {
+	CreateUserDto,
+	LoginUserDto
+} 							from './dto';
 import { AuthService } 		from './auth.service';
-import { CreateUserDto, LoginUserDto } 	from './dto';
-import { User } from './entities/user.entity';
-import { UserRoleGuard } from './guards/user-role.guard';
-import { ValidRoles } from './interfaces';
-
-import { GetUser, RoleProtected, RawHeaders, Auth } from './decorators';
+import { User } 			from './entities/user.entity';
+import { UserRoleGuard }	from './guards/user-role.guard';
+import { ValidRoles } 		from './interfaces';
+import {
+	GetUser,
+	RoleProtected,
+	RawHeaders,
+	Auth
+} 							from './decorators';
 
 
 @Controller('auth')
+@ApiTags( 'Auth' )
 export class AuthController {
     constructor(
 		private readonly authService: AuthService
@@ -27,6 +43,15 @@ export class AuthController {
     loginUser( @Body() loginUserDto: LoginUserDto ) {
 		return this.authService.login( loginUserDto );
     }
+
+
+	@Get( 'check-status' )
+	@Auth()
+	chechAuthStatus(
+		@GetUser() user: User
+	) {
+		return this.authService.checkAuthStatus( user );
+	}
 
 
 	@Get( 'private' )

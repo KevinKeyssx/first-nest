@@ -5,7 +5,7 @@ import { JwtModule } 		from '@nestjs/jwt';
 import {
 	ConfigModule,
 	ConfigService
-} from '@nestjs/config';
+} 							from '@nestjs/config';
 
 import { v4 as uuid } from 'uuid';
 

@@ -10,6 +10,7 @@ import { CommonModule } 	from './common/common.module';
 import { ProductsModule } 	from './products/products.module';
 import { SeedModule } 		from './seed/seed.module';
 import { FilesModule } 		from './files/files.module';
+import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
 
 @Module({
@@ -39,7 +40,13 @@ import { FilesModule } 		from './files/files.module';
 
 		FilesModule,
 
-		AuthModule
+		AuthModule,
+
+		// ServeStaticModule.forRoot({
+		// 	rootPath: join(__dirname, '..', 'public'),
+		// }),
+
+		MessagesWsModule
 	],
 })
 export class AppModule {}
