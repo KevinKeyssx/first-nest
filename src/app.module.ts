@@ -42,10 +42,6 @@ import { MessagesWsModule } from './messages-ws/messages-ws.module';
 
 		AuthModule,
 
-		// ServeStaticModule.forRoot({
-		// 	rootPath: join(__dirname, '..', 'public'),
-		// }),
-
 		MessagesWsModule
 	],
 })
