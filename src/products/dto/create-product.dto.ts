@@ -65,6 +65,10 @@ export class CreateProductDto {
     @IsIn([ 'men', 'women', 'kids', 'unisex' ])
     gender: string;
 
+    @ApiProperty({
+        example     : ['S', 'M', 'L', 'XL'],
+        description : 'The sizes available for the product',
+    })
     @IsString({ each: true })
     @IsArray()
     @IsOptional()

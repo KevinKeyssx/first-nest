@@ -44,13 +44,13 @@ export const initialData = async (): Promise<SeedData> => ({
             email       : 'test2@gmail.com',
             fullName    : 'Test Two',
             password    : await bcrypt.hash('Abc123', 10),
-            roles        : ['admin']
+            roles       : ['admin']
         },
         {
             email       : 'test3@gmail.com',
             fullName    : 'Test Tree',
             password    :  await bcrypt.hash('Abc123', 10),
-            roles        : ['super-user']
+            roles       : ['super-user']
         },
     ],
     products: [

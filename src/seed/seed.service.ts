@@ -34,16 +34,18 @@ export class SeedService {
 		const queryBuilder = this.userRepository.createQueryBuilder();
 
 		await queryBuilder
-			.delete()
-			.where({})
-			.execute();
+		.delete()
+		.where({})
+		.execute();
 	}
 
 
-	async #insertUsers() {
-		const dbUsers = await this.userRepository.save(( await initialData() ).users );
-		return dbUsers[0];
-	}
+	#insertUsers = async() => await this.userRepository
+	.save(( await initialData() ).users )[0];
+	// async #insertUsers() {
+	// 	const dbUsers = await this.userRepository.save(( await initialData() ).users );
+	// 	return dbUsers[0];
+	// }
 
 
 	async #insertNewProducts( user: User ) {
