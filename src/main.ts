@@ -35,8 +35,8 @@ import { AppModule } from './app.module';
 	});
 
 	const config = new DocumentBuilder()
-		.setTitle('Teslo API Documentation')
-		.setDescription('TesloShop API Documentation')
+		.setTitle('GraphQL API Documentation')
+		.setDescription('GraphQL API Documentation')
 		.setVersion('1.0')
 		.build();
 
