@@ -3,5 +3,12 @@
 # ------------------------------------------------------
 
 type Query {
-    hello: String!
+  """This is a first query"""
+  queryOne: String!
+
+  """This is a second query"""
+  randomNumber: Float!
+
+  """Take a random number from 0 to to, (Default to = 5)"""
+  randomFromZero(to: Int): Int!
 }
