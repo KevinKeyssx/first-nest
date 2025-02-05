@@ -14,11 +14,12 @@ import { AppModule } from './app.module';
 
 	app.useGlobalPipes( new ValidationPipe({ 
 		// *Whitelist solo deja pasar las propiedades que estén definidas en el DTO
-		whitelist               : true,
+		whitelist               : false,
 		// *Indica con un mensaje más descriptivo que propiedad no están permitidas
 		forbidNonWhitelisted	: true,
 		// *Esto transforma los tipos de datos de las propiedades a los definidos en el DTO
 		// *Pero también se pueden transformar por cada DTO
+        
 		// transform 				: true,
 		// transformOptions        : {
 		// 	enableImplicitConversion: true

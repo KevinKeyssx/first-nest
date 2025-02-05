@@ -1,4 +1,5 @@
 import { join } from 'path';
+import { TodoModule } from './todo/todo.module';
 
 import {
     ApolloDriver,
@@ -20,6 +21,7 @@ import { ApolloServerPluginLandingPageLocalDefault }    from '@apollo/server/plu
             plugins         : [ ApolloServerPluginLandingPageLocalDefault() ],
         }),
         GraphqlModule,
+        TodoModule,
     ],
     controllers : [],
     providers   : [],
