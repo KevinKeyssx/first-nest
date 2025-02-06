@@ -8,6 +8,14 @@ type Todo {
   done: Boolean!
 }
 
+"""Aggregations of todos"""
+type AggregationsType {
+  total: Int!
+  pending: Int!
+  complete: Int!
+  totalTodos: Int! @deprecated(reason: "Use total")
+}
+
 type Query {
   """This is a first query"""
   queryOne: String!
@@ -17,8 +25,12 @@ type Query {
 
   """Take a random number from 0 to to, (Default to = 5)"""
   randomFromZero(to: Int): Int!
-  todos: [Todo!]!
+  todos(done: Boolean): [Todo!]!
   todo(id: Int!): Todo!
+  totalTodos: Int!
+  pendingTodos: Int!
+  completeTodos: Int!
+  aggregations: AggregationsType!
 }
 
 type Mutation {

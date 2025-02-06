@@ -1,3 +1,4 @@
+import { StatusArgs } from './dto/args/status.args';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Todo } from './entity/todo.entity';
 import { CreateTodoInput } from './dto/inputs/create-todo.input';
@@ -8,14 +9,31 @@ export class TodoService {
 
     private todos: Todo[] = [
         { id: 1, description: 'Piedra del alma', done: false },
-        { id: 2, description: 'Piedra del tiempo', done: false },
+        { id: 2, description: 'Piedra del tiempo', done: true },
         { id: 3, description: 'Piedra del espacio', done: false },
-        { id: 4, description: 'Piedra del universo', done: false },
+        { id: 4, description: 'Piedra del universo', done: true },
+        { id: 5, description: 'Piedra del entretenimiento', done: true },
     ];
 
 
-    findAll(): Todo[] {
-        return this.todos;
+    get totalTodos(): number {
+        return this.todos.length;
+    }
+
+
+    get pendingTodos(): number {
+        return this.todos.filter( todo => !todo.done ).length;
+    }
+
+
+    get completeTodos(): number {
+        return this.todos.filter( todo => todo.done ).length;
+    }
+
+
+    findAll( { done }: StatusArgs ): Todo[] {
+        if ( !done ) return this.todos;
+        return this.todos.filter( todo => todo.done === done );
     }
 
     findOne(id: number): Todo {
@@ -44,6 +62,7 @@ export class TodoService {
 
         return currentTodo;
     }
+
 
     deleteTodo( id: number ): Todo {
         const todo = this.findOne( id );
